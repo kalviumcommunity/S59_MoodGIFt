@@ -9,3 +9,5 @@ MoodGIFt is a fun and lighthearted application designed to lift users' spirits b
 3. **Meme / GIF Recommendation**: The application recommends memes and GIFs based on the user's selected mood, providing an uplifting experience.
 4. **Random Recommendations**: Users can also opt for random recommendations if they're unsure of their current mood or just want a surprise.
 5. **Search Feature**: Users can search for specific memes or GIFs by entering keywords or tags.
+
+### By Sujal
