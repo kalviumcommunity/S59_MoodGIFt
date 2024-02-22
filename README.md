@@ -10,4 +10,7 @@ MoodGIFt is a fun and lighthearted application designed to lift users' spirits b
 4. **Random Recommendations**: Users can also opt for random recommendations if they're unsure of their current mood or just want a surprise.
 5. **Search Feature**: Users can search for specific memes or GIFs by entering keywords or tags.
 
+### Deployed link : 
+[MoodGIFt](https://s59-moodgift.onrender.com)
+
 ### By Sujal
