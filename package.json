@@ -4,7 +4,9 @@
   "description": "MoodGIFt is a fun and lighthearted application designed to lift users' spirits by recommending GIFs and memes based on their current mood or emotion. Users can log in, select their current mood from a list of options, and enjoy a selection of memes and GIFs tailored to their chosen mood.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "serve": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
