@@ -2,7 +2,7 @@ const {
   connectDB,
   disconnectDB,
   isConnected,
-} = require("./config/dbConnection");
+} = require("./src/connection/dbConnection");
 
 const express = require("express");
 const app = express();
