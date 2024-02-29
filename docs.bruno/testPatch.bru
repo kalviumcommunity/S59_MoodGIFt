@@ -1,0 +1,17 @@
+meta {
+  name: testPatch
+  type: http
+  seq: 4
+}
+
+patch {
+  url: http://localhost:8080/update/65e002b45c2509bca4fbc71d
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name" : "Meme55"
+  }
+}

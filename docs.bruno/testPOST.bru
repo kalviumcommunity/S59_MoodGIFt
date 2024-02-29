@@ -1,0 +1,19 @@
+meta {
+  name: testPOST
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/postMeme
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name" : "Meme2",
+    "url" : "url2",
+    "mood_category":"angry"
+  }
+}

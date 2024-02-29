@@ -1,0 +1,19 @@
+meta {
+  name: testPut
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:8080/replace/65e002b45c2509bca4fbc71d
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name" : "Meme3",
+    "url" : "url3",
+    "mood_category":"angry"
+  }
+}

@@ -1,22 +1,15 @@
-const {
-  connectDB,
-  disconnectDB,
-  isConnected,
-} = require("./src/connection/dbConnection");
-
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 const port = 8080;
 
-app.get("/", (req, res) => {
-  if (isConnected()) {
-    res.send("📦 connected to mongoDB");
-  } else {
-    res.send("❌ error connecting to mongoDB");
-  }
-});
+const { router } = require("./src/routes/routes");
 
-app.listen(port, () => {
-  console.log(`App listening at port: ${port}`);
-  connectDB();
+app.use(express.json());
+app.use("/", router);
+
+mongoose.connection.once("open", () => {
+  app.listen(port, () => {
+    console.log(`App listening at port: ${port}`);
+  });
 });
