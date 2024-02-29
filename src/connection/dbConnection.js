@@ -20,8 +20,5 @@ const disconnectDB = async () => {
   }
 };
 
-const isConnected = () => {
-  return mongoose.connection.readyState === 1;
-};
 
-module.exports = { connectDB, disconnectDB, isConnected };
+module.exports = { connectDB, disconnectDB };
