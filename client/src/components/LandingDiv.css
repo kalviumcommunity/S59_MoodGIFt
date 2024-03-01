@@ -1,0 +1,63 @@
+.landing-div {
+  position: relative;
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+#cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top, #0e051d, #0e051df3, #0f051dd3);
+  backdrop-filter: blur(2px);
+}
+
+.landing-texts {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  width: 90vw;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10vh;
+}
+
+.landing-texts h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  font-weight: 900;
+}
+
+.landing-texts h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-image: linear-gradient(45deg, purple, maroon);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}

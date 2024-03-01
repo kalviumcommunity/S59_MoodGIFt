@@ -1,0 +1,14 @@
+nav{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    align-items: center;
+}
+
+.nav-list{
+    list-style: none;
+    display: flex;
+    width: 450px;
+    justify-content: space-between;
+}
