@@ -1,0 +1,20 @@
+{
+  "name": "s59_moodgift",
+  "version": "1.0.0",
+  "description": "MoodGIFt is a fun and lighthearted application designed to lift users' spirits by recommending GIFs and memes based on their current mood or emotion. Users can log in, select their current mood from a list of options, and enjoy a selection of memes and GIFs tailored to their chosen mood.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd frontend && npm run dev\" \"cd backend && npm start\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "react-router-dom": "^6.22.2"
+  }
+}
