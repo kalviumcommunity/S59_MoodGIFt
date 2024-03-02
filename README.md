@@ -11,6 +11,6 @@ MoodGIFt is a fun and lighthearted application designed to lift users' spirits b
 
 ### Deployed link :
 
-[MoodGIFt](https://s59-moodgift.onrender.com)
+[MoodGIFt](https://main--mood-gift.netlify.app/)
 
 ### By SujalS
