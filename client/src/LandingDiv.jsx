@@ -1,6 +1,6 @@
 import React from "react";
 import "./LandingDiv.css";
-import Navbar from "./NavBar";
+import Navbar from "./components/NavBar";
 export default function LandingDiv() {
   return (
     <div>
