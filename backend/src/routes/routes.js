@@ -5,11 +5,13 @@ const { createMemeModel } = require("../models/memeModel");
 
 connectDB();
 
-router.get("/", async (req, res) => {
+router.get("/:category", async (req, res) => {
   try {
-    let AngryMemeModel = createMemeModel("Angry");
+    const category = req.params.category + '_meme';
 
-    const memeData = await AngryMemeModel.find();
+    let memeModel = createMemeModel(category);
+
+    const memeData = await memeModel.find();
 
     res.send(memeData);
   } catch (error) {
@@ -17,11 +19,13 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/postMeme", async (req, res) => {
+router.post("/postMeme/:category", async (req, res) => {
   try {
-    let AngryMemeModel = createMemeModel("Angry");
+    const category = req.params.category + "_meme";
 
-    const newMeme = new AngryMemeModel(req.body);
+    let memeModel = createMemeModel(category);
+
+    const newMeme = new memeModel(req.body);
     const savedNewMeme = await newMeme.save();
 
     res.status(201).json(savedNewMeme);
