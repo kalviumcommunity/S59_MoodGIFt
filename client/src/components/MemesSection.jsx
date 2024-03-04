@@ -7,18 +7,21 @@ export default function MemesSection() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(category);
-    let end = category.toLowerCase();
-    const api = `https://moodgift.onrender.com/${end}`;
-    fetch(api)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        setData(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (category != "") {
+      let end = category.toLowerCase();
+      console.log(end);
+
+      const api = `https://frantic-smock-lion.cyclic.app/${end}`;
+      fetch(api)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setData(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [category]);
 
   return (
@@ -32,8 +35,8 @@ export default function MemesSection() {
         <Button category={"Stressed"} setCategory={setCategory} />
       </div>
       <div id="memes">
-        {data.map((meme) => {
-          return <Meme meme={meme} />;
+        {data.map((meme, i) => {
+          return <Meme key={i} meme={meme} />;
         })}
       </div>
     </div>
