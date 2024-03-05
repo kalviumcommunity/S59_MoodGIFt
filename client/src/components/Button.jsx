@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function Button({ category, setCategory }) {
+export default function Button({ category, handleClick }) {
   return (
     <button
       onClick={() => {
-        setCategory(category);
+        handleClick(category);
       }}
       className="button"
     >

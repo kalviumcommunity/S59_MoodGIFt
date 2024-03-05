@@ -1,11 +1,23 @@
 #memeSection {
   background-color: #0e051d;
 }
-#buttons {
+
+#buttons{
+  padding: 2rem;
   display: flex;
-  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+#buttonDiv {
+  position: absolute;
+  display: flex;
+  width: 100%;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
+  padding: 2rem;
+  top: -120%;
 }
 
 #memes {
@@ -29,8 +41,8 @@
 }
 
 .meme-img {
-  width: 200px;
-  height: auto;
+  width: auto;
+  height: 250px;
   border-radius: 10px;
 }
 

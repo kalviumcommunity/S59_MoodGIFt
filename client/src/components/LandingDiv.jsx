@@ -1,7 +1,12 @@
 import React from "react";
 import "./LandingDiv.css";
-import Navbar from "./components/NavBar";
+import Navbar from "./NavBar";
 export default function LandingDiv() {
+  const handleClick = () => {
+    var target = document.getElementById("selectButton");
+    target.scrollIntoView({ top: 100, behavior: "smooth" });
+  };
+
   return (
     <div>
       <div className="landing-div">
@@ -17,10 +22,11 @@ export default function LandingDiv() {
               designed to lift your spirits, one meme at a time.
             </h3>
           </div>
-          <button className="button">Get Started</button>
+          <button className="button" onClick={handleClick}>
+            Get Started
+          </button>
         </div>
       </div>
-      
     </div>
   );
 }

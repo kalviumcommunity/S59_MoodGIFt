@@ -1,6 +1,6 @@
 .landing-div {
   position: relative;
-  background-image: url("../assets/bg.jpg");
+  background-image: url("./src/assets/bg.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -11,8 +11,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background: linear-gradient(to top, #0e051d, #0e051df3, #0f051dd3);
   backdrop-filter: blur(2px);
 }
