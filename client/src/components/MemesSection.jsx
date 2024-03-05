@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import "./MemesSection.css";
 import Meme from "./Meme";
+import ButtonDiv from "./ButtonDiv";
 export default function MemesSection() {
   const [category, setCategory] = useState("");
   const [data, setData] = useState([]);
+  const [selectionVisibility, setSelectionVisibility] = useState("none");
 
   useEffect(() => {
     if (category != "") {
@@ -17,6 +19,10 @@ export default function MemesSection() {
         .then((data) => {
           console.log(data);
           setData(data);
+          setTimeout(() => {
+            var target = document.getElementById("memes");
+            target.scrollIntoView({ top: 0, behavior: "smooth" });
+          }, 1000);
         })
         .catch((err) => {
           console.log(err);
@@ -27,12 +33,21 @@ export default function MemesSection() {
   return (
     <div id="memeSection">
       <div id="buttons">
-        <Button category={"Happy"} setCategory={setCategory} />
-        <Button category={"Bored"} setCategory={setCategory} />
-        <Button category={"Excited"} setCategory={setCategory} />
-        <Button category={"Angry"} setCategory={setCategory} />
-        <Button category={"Sad"} setCategory={setCategory} />
-        <Button category={"Stressed"} setCategory={setCategory} />
+        <button
+          id="selectButton"
+          className="button"
+          onClick={() => {
+            if (selectionVisibility === "flex") setSelectionVisibility("none");
+            else setSelectionVisibility("flex");
+          }}
+        >
+          Select Category
+        </button>
+        <ButtonDiv
+          setCategory={setCategory}
+          selectionVisibility={selectionVisibility}
+          setSelectionVisibility={setSelectionVisibility}
+        />
       </div>
       <div id="memes">
         {data.map((meme, i) => {
