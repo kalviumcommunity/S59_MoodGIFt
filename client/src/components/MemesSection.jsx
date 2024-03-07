@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import "./MemesSection.css";
 import Meme from "./Meme";
-import ButtonDiv from "./ButtonDiv";
+import CategoryDiv from "./CategoryDiv";
 export default function MemesSection() {
   const [category, setCategory] = useState("");
   const [data, setData] = useState([]);
@@ -30,6 +30,11 @@ export default function MemesSection() {
     }
   }, [category]);
 
+  const handleClick = (mood) => {
+    setCategory(mood);
+    setSelectionVisibility("none");
+  };
+
   return (
     <div id="memeSection">
       <div id="buttons">
@@ -43,10 +48,11 @@ export default function MemesSection() {
         >
           Select Category
         </button>
-        <ButtonDiv
+        <CategoryDiv
           setCategory={setCategory}
           selectionVisibility={selectionVisibility}
           setSelectionVisibility={setSelectionVisibility}
+          handleClick={handleClick}
         />
       </div>
       <div id="memes">

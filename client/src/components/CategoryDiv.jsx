@@ -1,16 +1,12 @@
 import React from "react";
 import Button from "./Button";
 
-export default function ButtonDiv({
+export default function CategoryDiv({
   setCategory,
   selectionVisibility,
   setSelectionVisibility,
+  handleClick,
 }) {
-  const handleClick = (mood) => {
-    setCategory(mood);
-    setSelectionVisibility("none");
-  };
-
   const style = {
     display: selectionVisibility,
   };
@@ -35,7 +31,15 @@ export default function ButtonDiv({
   return (
     <div id="buttonDiv" style={style}>
       {moods.map((mood, i) => {
-        return <Button key={i} category={mood} handleClick={handleClick} />;
+        return (
+          <Button
+            key={i}
+            category={mood}
+            handleClick={() => {
+              handleClick(mood);
+            }}
+          />
+        );
       })}
     </div>
   );

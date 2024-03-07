@@ -1,5 +1,5 @@
 #memeSection {
-  background-color: #0e051d;
+  padding: 2rem;
 }
 
 #buttons{
@@ -9,10 +9,11 @@
   align-items: center;
   position: relative;
 }
+
 #buttonDiv {
-  position: absolute;
   display: flex;
-  width: 100%;
+  width: 60vw;
+  margin: auto;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
@@ -26,7 +27,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   align-content: center;
 }
 

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import MemesSection from "./components/MemesSection";
 import LandingDiv from "./components/LandingDiv";
+import Navbar from "./components/NavBar";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 function App() {
   return (
     <div className="App">
-      <LandingDiv />
-      <MemesSection />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<LandingDiv />} />
+        <Route path="/categories" element={<MemesSection />} />
+      </Routes>
     </div>
   );
 }

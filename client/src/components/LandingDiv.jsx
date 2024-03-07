@@ -1,6 +1,8 @@
 import React from "react";
 import "./LandingDiv.css";
-import Navbar from "./NavBar";
+import MemeGIF from "../assets/meme.gif";
+import WhatToDo from "./WhatToDo";
+
 export default function LandingDiv() {
   const handleClick = () => {
     var target = document.getElementById("selectButton");
@@ -8,25 +10,25 @@ export default function LandingDiv() {
   };
 
   return (
-    <div>
-      <div className="landing-div">
-        <div id="cover"></div>
-        <Navbar />
-        <div className="landing-texts">
+    <>
+      <div className="landing-div flex space-around align-center">
+        <div className="landing-texts flex column">
           <h1>Welcome to MoodGIFt: Your Mood-Boosting Meme Companion!</h1>
           <div>
-            <h2>Discover Memes That Match Your Mood</h2>
             <h3>
               Feeling down? Stressed? Or maybe just looking for a good laugh?
-              MoodGIFt has you covered! Our curated collection of memes is
-              designed to lift your spirits, one meme at a time.
+              MoodGIFt has you covered!
             </h3>
+            <button className="button" onClick={handleClick}>
+              Get Started
+            </button>
           </div>
-          <button className="button" onClick={handleClick}>
-            Get Started
-          </button>
+        </div>
+        <div className="meme-gif-div">
+          <img src={MemeGIF} alt="" id="meme-gif" />
         </div>
       </div>
-    </div>
+      {/* <WhatToDo/> */}
+    </>
   );
 }
