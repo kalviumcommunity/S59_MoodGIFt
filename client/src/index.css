@@ -13,6 +13,7 @@
 body {
   min-height: 100vh;
   background-image: linear-gradient(135deg, #0c0118, #17042c, #571855);
+  overflow-x: hidden;
 }
 
 .flex {

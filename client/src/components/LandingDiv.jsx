@@ -2,7 +2,7 @@ import React from "react";
 import "./LandingDiv.css";
 import MemeGIF from "../assets/meme.gif";
 import WhatToDo from "./WhatToDo";
-
+import { Link } from "react-router-dom";
 export default function LandingDiv() {
   const handleClick = () => {
     var target = document.getElementById("selectButton");
@@ -19,9 +19,9 @@ export default function LandingDiv() {
               Feeling down? Stressed? Or maybe just looking for a good laugh?
               MoodGIFt has you covered!
             </h3>
-            <button className="button" onClick={handleClick}>
-              Get Started
-            </button>
+            <Link to={'/categories'}>
+              <button className="button">Get Started</button>
+            </Link>
           </div>
         </div>
         <div className="meme-gif-div">
