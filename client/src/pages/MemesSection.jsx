@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Button from "./Button";
+import Button from "../components/Button";
 import "./MemesSection.css";
-import Meme from "./Meme";
-import CategoryDiv from "./CategoryDiv";
+import Meme from "../components/Meme";
+import CategoryDiv from "../components/CategoryDiv";
+import MemeInfo from "../components/MemeInfo";
+
 export default function MemesSection() {
   const [category, setCategory] = useState("");
   const [data, setData] = useState([]);
   const [selectionVisibility, setSelectionVisibility] = useState("none");
-
+  const [showMemeInfo, setShowMemeInfo] = useState(false);
+  const [currentMeme, setCurrentMeme] = useState(null);
+  
   useEffect(() => {
     if (category != "") {
       let end = category.toLowerCase();
@@ -35,6 +39,10 @@ export default function MemesSection() {
     setSelectionVisibility("none");
   };
 
+  const showMeme = (meme) => {
+    setShowMemeInfo(!showMemeInfo);
+  };
+
   return (
     <div id="memeSection">
       <div id="buttons">
@@ -57,7 +65,7 @@ export default function MemesSection() {
       </div>
       <div id="memes">
         {data.map((meme, i) => {
-          return <Meme key={i} meme={meme} />;
+          return <Meme key={i} meme={meme} setShowMemeInfo={setShowMemeInfo} />;
         })}
       </div>
     </div>

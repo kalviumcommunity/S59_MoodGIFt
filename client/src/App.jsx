@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import MemesSection from "./components/MemesSection";
-import LandingDiv from "./components/LandingDiv";
+import MemesSection from "./pages/MemesSection";
+import LandingDiv from "./pages/LandingDiv";
 import Navbar from "./components/NavBar";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import MemeForm from "./components/MemeForm";
+import MemeForm from "./pages/MemeForm";
 function App() {
   return (
     <div className="App">
