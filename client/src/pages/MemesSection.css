@@ -2,7 +2,7 @@
   padding: 2rem;
 }
 
-#buttons{
+#buttons {
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
   align-content: center;
 }
 
@@ -40,6 +40,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.meme:hover {
+  transform: scale(1.05);
 }
 
 .meme-img {
@@ -50,4 +56,39 @@
 
 .meme-name {
   font-size: 20px;
+}
+
+.infoBgCover {
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  backdrop-filter: blur(3px);
+  z-index: 0;
+}
+
+.memeInfo {
+  position: fixed;
+  top: 20vh;
+}
+
+.info-meme {
+  z-index: 2;
+  position: relative;
+  border-radius: 20px;
+  background-color: #240c4aa7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.memeInfo .meme-img {
+  height: 300px;
+}
+
+.memeInfo * {
+  margin: 0.5rem;
 }

@@ -11,7 +11,7 @@ export default function MemesSection() {
   const [selectionVisibility, setSelectionVisibility] = useState("none");
   const [showMemeInfo, setShowMemeInfo] = useState(false);
   const [currentMeme, setCurrentMeme] = useState(null);
-  
+
   useEffect(() => {
     if (category != "") {
       let end = category.toLowerCase();
@@ -41,6 +41,7 @@ export default function MemesSection() {
 
   const showMeme = (meme) => {
     setShowMemeInfo(!showMemeInfo);
+    setCurrentMeme(meme);
   };
 
   return (
@@ -63,9 +64,18 @@ export default function MemesSection() {
           handleClick={handleClick}
         />
       </div>
+
       <div id="memes">
+        {showMemeInfo && (
+          <>
+            <div className="infoBgCover" onClick={() => {
+              setShowMemeInfo(false)
+            }}></div>
+            <MemeInfo currentMeme={currentMeme} />
+          </>
+        )}
         {data.map((meme, i) => {
-          return <Meme key={i} meme={meme} setShowMemeInfo={setShowMemeInfo} />;
+          return <Meme key={i} meme={meme} showMeme={showMeme} />;
         })}
       </div>
     </div>
