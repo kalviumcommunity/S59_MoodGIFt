@@ -7,7 +7,7 @@ connectDB();
 
 router.get("/:category", async (req, res) => {
   try {
-    const category = req.params.category + '_meme';
+    const category = req.params.category + "_meme";
 
     let memeModel = createMemeModel(category);
 
@@ -34,11 +34,13 @@ router.post("/postMeme/:category", async (req, res) => {
   }
 });
 
-router.patch("/update/:id", async (req, res) => {
+router.patch("/patch/:category/:id", async (req, res) => {
   try {
-    let AngryMemeModel = createMemeModel("Angry");
+    const category = req.params.category + "_meme";
 
-    const updateStatus = await AngryMemeModel.findByIdAndUpdate(
+    let memeModel = createMemeModel(category);
+
+    const updateStatus = await memeModel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
       { new: true }
@@ -54,7 +56,7 @@ router.patch("/update/:id", async (req, res) => {
   }
 });
 
-router.put("/replace/:id", async (req, res) => {
+router.put("/replace/:category/:id", async (req, res) => {
   try {
     let AngryMemeModel = createMemeModel("Angry");
 
@@ -74,11 +76,12 @@ router.put("/replace/:id", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:category/:id", async (req, res) => {
   try {
-    let AngryMemeModel = createMemeModel("Angry");
+    const category = req.params.category + "_meme";
 
-    const deleteStatus = await AngryMemeModel.findByIdAndDelete(req.params.id);
+    let memeModel = createMemeModel(category);
+    const deleteStatus = await memeModel.findByIdAndDelete(req.params.id);
 
     if (deleteStatus) {
       res.status(200).json({ message: "Data deleted successfully" });
