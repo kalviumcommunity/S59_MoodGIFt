@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Button from "../components/Button";
 import "./MemesSection.css";
 import Meme from "../components/Meme";
 import CategoryDiv from "../components/CategoryDiv";
-import MemeInfo from "../components/MemeInfo";
+import { useNavigate } from "react-router-dom";
 
-export default function MemesSection() {
+export default function MemesSection({ currentMeme, setCurrentMeme }) {
+  const navigate = useNavigate();
   const [category, setCategory] = useState("");
   const [data, setData] = useState([]);
   const [selectionVisibility, setSelectionVisibility] = useState("none");
-  const [showMemeInfo, setShowMemeInfo] = useState(false);
-  const [currentMeme, setCurrentMeme] = useState(null);
 
   useEffect(() => {
     if (category != "") {
@@ -32,7 +30,7 @@ export default function MemesSection() {
           console.log(err);
         });
     }
-  }, [category]);
+  }, [category, currentMeme]);
 
   const handleClick = (mood) => {
     setCategory(mood);
@@ -40,8 +38,8 @@ export default function MemesSection() {
   };
 
   const showMeme = (meme) => {
-    setShowMemeInfo(!showMemeInfo);
     setCurrentMeme(meme);
+    navigate("/memeOverview");
   };
 
   return (
@@ -66,14 +64,6 @@ export default function MemesSection() {
       </div>
 
       <div id="memes">
-        {showMemeInfo && (
-          <>
-            <div className="infoBgCover" onClick={() => {
-              setShowMemeInfo(false)
-            }}></div>
-            <MemeInfo currentMeme={currentMeme} />
-          </>
-        )}
         {data.map((meme, i) => {
           return <Meme key={i} meme={meme} showMeme={showMeme} />;
         })}

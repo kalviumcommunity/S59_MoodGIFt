@@ -3,25 +3,31 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Form.css";
 import axios from "axios";
-const UpdateForm = ({ meme_id, setInitiateUpdate, category }) => {
+
+const UpdateForm = ({ currentMeme, setInitiateUpdate }) => {
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: currentMeme.name,
+      url: currentMeme.url,
+    },
+  });
 
   const onSubmit = async (data) => {
     try {
-      console.log(meme_id);
-      const mood_category = category.toLowerCase();
+      const meme_id = currentMeme._id;
+      const mood_category = currentMeme.mood_category.toLowerCase();
       const filteredData = Object.fromEntries(
         Object.entries(data).filter(([key, value]) => value !== "")
       );
 
-      console.log(filteredData)
+      console.log(filteredData);
       const response = await axios.patch(
-        `https://frantic-smock-lion.cyclic.app/postMeme/${mood_category}/${meme_id}`,
+        `https://frantic-smock-lion.cyclic.app/patch/${mood_category}/${meme_id}`,
         filteredData
       );
 
@@ -34,17 +40,17 @@ const UpdateForm = ({ meme_id, setInitiateUpdate, category }) => {
 
   return (
     <div className="container">
-      <h1>Update Meme</h1>
+      <h1>Update {currentMeme.name}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="field">
-          <label htmlFor="name">Name</label>
-          <input type="text" {...register("name")} />
+          <label htmlFor="name">Updated Name:</label>
+          <input type="text" {...register("name", { required: true })} />
           {errors.name && <p className="error">This field is required</p>}
         </div>
 
         <div className="field">
-          <label htmlFor="url">URL</label>
-          <input type="text" {...register("url")} />
+          <label htmlFor="url">Updated URL:</label>
+          <input type="text" {...register("url", { required: true })} />
           {errors.url && <p className="error">This field is required</p>}
         </div>
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DeleteConfirmation from "./DeleteConfirmation";
 import UpdateForm from "./UpdateForm";
+import "./MemeInfo.css";
 export default function MemeInfo({ currentMeme }) {
   const [initiateUpdate, setInitiateUpdate] = useState(false);
   const [initiateDelete, setInitiateDelete] = useState(false);
@@ -9,15 +10,14 @@ export default function MemeInfo({ currentMeme }) {
       {initiateUpdate && (
         <UpdateForm
           setInitiateUpdate={setInitiateUpdate}
-          meme_id={currentMeme._id}
-          category={currentMeme.mood_category}
+          currentMeme={currentMeme}
         />
       )}
 
       {initiateDelete && (
         <DeleteConfirmation
           setInitiateDelete={setInitiateDelete}
-          meme_id={currentMeme._id}
+          currentMeme={currentMeme}
         />
       )}
 
