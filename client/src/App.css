@@ -16,3 +16,12 @@
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+
+.update-button {
+  margin-right: 10px; /* Add some space between buttons */
+  background-image: linear-gradient(45deg, #4CAF50, #2196F3); /* Green to Blue gradient */
+}
+
+.delete-button {
+  background-image: linear-gradient(45deg, #FF5733, #C70039); /* Orange to Red gradient */
+}

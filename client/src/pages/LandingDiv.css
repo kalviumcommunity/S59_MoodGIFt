@@ -5,7 +5,8 @@
 }
 
 #meme-gif {
-  width: 500px;
+  width: 80vw;
+  max-width: 500px;
   border-radius: 20px;
 }
 
@@ -46,9 +47,6 @@
   
 }
 @media (width < 1200px) {
-  #meme-gif {
-    width: 400px;
-  }
   .landing-texts h1 {
     font-size: 2.5rem;
   }
