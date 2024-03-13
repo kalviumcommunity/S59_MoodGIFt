@@ -1,8 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import "./Form.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -11,18 +14,25 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("/api/register", {
+      const response = await fetch("http://localhost:8080/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error(`Error registering user: ${response.statusText}`);
-      }
+      if (response.ok) {
+        const { message } = await response.json();
 
-      const { message, data: savedUser } = await response.json();
-      console.log("Registration successful:", message);
+        console.log("Registration successful:", message);
+
+        toast.success("Registration Successsful!");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.error);
+      }
     } catch (error) {
       console.error("Registration error:", error);
     }
@@ -82,6 +92,7 @@ const RegisterForm = () => {
           <p className="link">Login here</p>
         </Link>
       </div>
+      <ToastContainer theme="dark" autoClose={2000} />
     </form>
   );
 };

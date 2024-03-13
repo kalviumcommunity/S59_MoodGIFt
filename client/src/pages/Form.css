@@ -33,10 +33,13 @@ select {
   border-radius: 10px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="email"],
+input[type="password"] {
   color: black;
   outline: none;
 }
+
 .error {
   color: red;
   margin-top: 5px;

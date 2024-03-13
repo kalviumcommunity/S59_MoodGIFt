@@ -1,28 +1,50 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Form.css";
-const LoginForm = () => {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const LoginForm = ({ setIsUserLoggedIn }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
+  function getExpirationDate(days) {
+    const now = new Date();
+    now.setDate(now.getDate() + days);
+    return now.toUTCString();
+  }
+
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("http://localhost:8080/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error(`Error logging in: ${response.statusText}`);
-      }
+      if (response.ok) {
+        const { message, username } = await response.json();
 
-      const { message } = await response.json();
-      console.log("Login successful:", message);
+        console.log("Login successful:", message);
+
+        toast.success(message);
+        document.cookie = `username=${username}; expires=${getExpirationDate(
+          1
+        )}`;
+        setIsUserLoggedIn(true);
+        setTimeout(() => {
+          navigate("/profile");
+        }, 2000);
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.error);
+      }
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -54,9 +76,10 @@ const LoginForm = () => {
         Don't have an account?{" "}
         <Link to="/register">
           {" "}
-          <p className="link">Register here</p>
+          <span className="link">Register here</span>
         </Link>
       </p>
+      <ToastContainer theme="dark" autoClose={2000} />
     </form>
   );
 };
