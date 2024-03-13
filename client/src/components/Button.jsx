@@ -1,14 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Button({ category, handleClick }) {
+export default function Button({ category }) {
   return (
-    <button
-      onClick={() => {
-        handleClick(category);
-      }}
-      className="button"
-    >
-      {category}
-    </button>
+    <Link to={`/memes/${category}`}>
+      <button className="button">{category}</button>
+    </Link>
   );
 }

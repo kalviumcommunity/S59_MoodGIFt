@@ -32,14 +32,14 @@ const UpdateForm = ({ currentMeme, setInitiateUpdate }) => {
       );
 
       console.log(response.data);
-      navigate("/categories");
+      navigate(`/memes/${currentMeme.mood_category}`);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
   return (
-    <div className="container">
+    <div className="update-form">
       <h1>Update {currentMeme.name}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="field">
