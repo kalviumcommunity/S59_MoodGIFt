@@ -13,14 +13,14 @@ export default function DeleteConfirmation({ setInitiateDelete, currentMeme }) {
       );
 
       console.log(response.data);
-      navigate("/categories");
+      navigate(`/memes/${currentMeme.mood_category}`);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
   return (
-    <div>
+    <div className="delete-confirmation">
       <h1>Confirm Delete?</h1>
       <div className="flex">
         <button

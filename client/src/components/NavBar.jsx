@@ -17,6 +17,7 @@ function Navbar() {
         className={`cover ${navBarVisibility}`}
         onClick={handleClick}
       ></div>
+
       <nav className="flex space-between align-center">
         <Link to="/">
           <h2>MoodGIFT</h2>
@@ -39,7 +40,7 @@ function Navbar() {
             <li>Post Meme</li>
           </Link>
 
-          <Link to="/profile">
+          <Link to="/register">
             <li>Profile</li>
           </Link>
         </ul>
@@ -56,7 +57,7 @@ function Navbar() {
           <Link to="/about">
             <li>About</li>
           </Link>
-          <Link to="/profile">
+          <Link to="/register">
             <li>Profile</li>
           </Link>
         </ul>
