@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Categories from "./pages/Categories";
 import LandingDiv from "./pages/LandingDiv";
 import Navbar from "./components/NavBar";
@@ -9,11 +9,23 @@ import MemeForm from "./pages/MemeForm";
 import Memes from "./pages/Memes";
 import RegisterForm from "./pages/RegistrationForm";
 import LoginForm from "./pages/LoginForm";
+import UserProfile from "./pages/UserInfo";
+
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  
+  useEffect(() => {
+    const usernameCookie = document.cookie
+      .split(";")
+      .find((cookie) => cookie.startsWith("username="));
+    if (usernameCookie) {
+      setIsUserLoggedIn(true);
+    }
+  },[]);
+
   return (
     <div className="App">
-      <Navbar isUserLoggedIn={isUserLoggedIn} />
+      <Navbar />
       <Routes>
         <Route path="/" element={<LandingDiv />} />
         <Route path="/categories" element={<Categories />} />
@@ -21,7 +33,19 @@ function App() {
         <Route path="/post" element={<MemeForm />} />
         <Route path="/memeOverview" element={<MemeInfo />} />
         <Route path="/register" element={<RegisterForm />}></Route>
-        <Route path="/login" element={<LoginForm />}></Route>
+        <Route
+          path="/login"
+          element={<LoginForm setIsUserLoggedIn={setIsUserLoggedIn} />}
+        ></Route>
+        <Route
+          path="/profile"
+          element={
+            <UserProfile
+              setIsUserLoggedIn={setIsUserLoggedIn}
+              isUserLoggedIn={isUserLoggedIn}
+            />
+          }
+        />
       </Routes>
     </div>
   );

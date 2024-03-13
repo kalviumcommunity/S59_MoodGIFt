@@ -40,7 +40,7 @@ function Navbar() {
             <li>Post Meme</li>
           </Link>
 
-          <Link to="/register">
+          <Link to="/profile">
             <li>Profile</li>
           </Link>
         </ul>
