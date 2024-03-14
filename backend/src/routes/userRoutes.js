@@ -23,7 +23,7 @@ const verifyToken = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     req.user = decoded;
-    console.log(decoded)
+    console.log(decoded);
     next();
   } catch (error) {
     return res.status(401).json({ error: "Invalid token" });
@@ -86,6 +86,11 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
       expiresIn: "1h",
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
     });
 
     res.status(200).json({ token });
