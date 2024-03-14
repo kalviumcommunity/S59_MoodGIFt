@@ -14,6 +14,10 @@ const memeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    posted_by: {
+      type: String,
+      required: true,
+    },
     upload_date: {
       type: Date,
       default: Date.now(),

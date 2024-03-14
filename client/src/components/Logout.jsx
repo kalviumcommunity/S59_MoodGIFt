@@ -15,6 +15,7 @@ const LogoutForm = ({ setIsUserLoggedIn }) => {
       setIsUserLoggedIn(false);
       console.log("User logged out successfully");
       toast.success("LogOut Successful!");
+      
       setTimeout(() => {
         navigate("/login");
       }, 2000);

@@ -31,7 +31,7 @@ function App() {
         <Route path="/" element={<LandingDiv />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/memes/:category" element={<Memes />} />
-        <Route path="/post" element={<MemeForm />} />
+        <Route path="/post" element={<MemeForm isUserLoggedIn={isUserLoggedIn}/>} />
         <Route path="/memeOverview" element={<MemeInfo />} />
         <Route path="/register" element={<RegisterForm />}></Route>
         <Route
