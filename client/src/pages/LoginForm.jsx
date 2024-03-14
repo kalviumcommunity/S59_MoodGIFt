@@ -22,24 +22,20 @@ const LoginForm = ({ setIsUserLoggedIn }) => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:8080/login", {
+      const response = await fetch("http://localhost:8080/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
       if (response.ok) {
-        const { message, username } = await response.json();
+        const { token } = await response.json();
 
-        console.log("Login successful:", message);
-
-        toast.success(message);
-        document.cookie = `username=${username}; expires=${getExpirationDate(
-          1
-        )}`;
+        toast.success('Login Successful');
+        document.cookie = `token=${token}; expires=${getExpirationDate(1)}`;
         setIsUserLoggedIn(true);
         setTimeout(() => {
-          navigate("/profile");
+          navigate("/");
         }, 2000);
       } else {
         const errorData = await response.json();

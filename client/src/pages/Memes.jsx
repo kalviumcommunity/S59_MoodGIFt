@@ -21,7 +21,7 @@ export default function Memes() {
       let end = category.toLowerCase();
       console.log(end);
 
-      const api = `https://frantic-smock-lion.cyclic.app/${category}`;
+      const api = `http://localhost:8080/meme/${category}`;
       fetch(api)
         .then((res) => res.json())
         .then((data) => {
