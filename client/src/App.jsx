@@ -13,15 +13,16 @@ import UserProfile from "./pages/UserInfo";
 
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  
+
   useEffect(() => {
-    const usernameCookie = document.cookie
+    const userCookie = document.cookie
       .split(";")
-      .find((cookie) => cookie.startsWith("username="));
-    if (usernameCookie) {
+      .find((cookie) => cookie.trim().startsWith("user="));
+    console.log(userCookie);
+    if (userCookie) {
       setIsUserLoggedIn(true);
     }
-  },[]);
+  }, []);
 
   return (
     <div className="App">

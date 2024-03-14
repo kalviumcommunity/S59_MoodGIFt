@@ -13,12 +13,13 @@ const UserProfile = ({ setIsUserLoggedIn, isUserLoggedIn }) => {
     } else {
       const fetchUserData = async () => {
         try {
-          const usernameCookie = document.cookie
+          const userCookie = document.cookie
             .split(";")
-            .find((cookie) => cookie.startsWith("username="));
-          const usernameValue = usernameCookie?.split("=")[1];
+            .find((cookie) => cookie.trim().startsWith("user="));
+          const user = userCookie?.split("=")[1];
+          console.log(user);
           const response = await fetch(
-            `http://localhost:8080/user/${usernameValue}`
+            `http://localhost:8080/user/profile/${user}`
           );
           const data = await response.json();
           setUserData(data);

@@ -1,16 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
-const crypto = require("crypto");
 
-// import connectDB function to initiate connection
-const { connectDB } = require("../connection/dbConnection");
 
 // import createMemeModel to dynamically create the model
 const { createMemeModel } = require("../models/memeModel");
-
-const { User } = require("../models/userModel");
-connectDB();
 
 // joi meme schema for validation
 const memeSchema = Joi.object({
@@ -26,13 +20,7 @@ const patchMemeSchema = Joi.object({
   mood_category: Joi.string(),
 }).or("name", "url", "mood_category");
 
-// joi schema for user validation
-const userSchema = Joi.object({
-  fullname: Joi.string().required(),
-  username: Joi.string().required(),
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
-});
+
 
 // get endpoint for api
 router.get("/:category", async (req, res) => {
@@ -46,21 +34,6 @@ router.get("/:category", async (req, res) => {
     res.send(memeData);
   } catch (error) {
     console.log(error);
-  }
-});
-
-router.get("/user/:userName", async (req, res) => {
-  try {
-    const userName = req.params.userName;
-    const user = await User.findOne({ username: userName });
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.status(200).json({ user });
-  } catch (error) {
-    res.status(500).json({ error: error });
   }
 });
 
@@ -82,76 +55,6 @@ router.post("/postMeme/:category", async (req, res) => {
     res.status(201).json(savedNewMeme);
   } catch (error) {
     res.status(400).json({ error: "Failed to insert data" });
-  }
-});
-
-// post end point for creating new user
-router.post("/register", async (req, res) => {
-  try {
-    const { error } = userSchema.validate(req.body, { abortEarly: false });
-    if (error) {
-      return res.status(400).json({ error: error.details });
-    }
-
-    const { fullname, username, email, password } = req.body;
-
-    const existingUsername = await User.findOne({ username });
-    if (existingUsername) {
-      return res
-        .status(400)
-        .json({ existingUsernameError: "Username is already taken" });
-    }
-
-    const existingEmail = await User.findOne({ email });
-    if (existingEmail) {
-      return res
-        .status(400)
-        .json({ existingEmailError: "Email is already registered" });
-    }
-
-    const newUser = new User({
-      fullname,
-      username,
-      email,
-    });
-
-    newUser.setPassword(password);
-
-    const savedUser = await newUser.save();
-
-    res
-      .status(201)
-      .json({ message: "User registered successfully", data: savedUser });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// login endpoint
-router.post("/login", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    const user = await User.findOne({ username });
-
-    if (!user || !user.validatePassword(password)) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    res.cookie("UserName", username, {
-      httpOnly: true,
-      expires: new Date(Date.now() + 60 * 60 * 1000),
-    });
-
-    res.status(201).json({
-      message: "Login successful",
-      username: username,
-      userId: user._id,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
   }
 });
 
@@ -231,4 +134,4 @@ router.delete("/delete/:category/:id", async (req, res) => {
   }
 });
 
-module.exports = { router };
+module.exports =router ;

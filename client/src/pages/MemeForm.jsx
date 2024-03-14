@@ -14,7 +14,7 @@ const MemeForm = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        `https://frantic-smock-lion.cyclic.app/postMeme/${data.mood_category}`,
+        `http://localhost:8080/meme/postMeme/${data.mood_category}`,
         data
       );
       console.log(response.data);
