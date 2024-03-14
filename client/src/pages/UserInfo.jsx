@@ -12,20 +12,29 @@ const UserProfile = ({ setIsUserLoggedIn, isUserLoggedIn }) => {
       navigate("/login");
     } else {
       const fetchUserData = async () => {
-        try {
-          const userCookie = document.cookie
-            .split(";")
-            .find((cookie) => cookie.trim().startsWith("user="));
-          const user = userCookie?.split("=")[1];
-          console.log(user);
-          const response = await fetch(
-            `http://localhost:8080/user/profile/${user}`
-          );
-          const data = await response.json();
-          setUserData(data);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
+        const tokenCookie = document.cookie
+          .split(";")
+          .find((cookie) => cookie.trim().startsWith("token="));
+        const token = tokenCookie?.split("=")[1];
+
+        if (!token) {
+          navigate("/login");
+          return;
         }
+
+        const response = await fetch(`http://localhost:8080/user/profile`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        if (response.status === 401) {
+          navigate("/login");
+          return;
+        }
+
+        const data = await response.json();
+        console.log(data);
+        setUserData(data.user);
       };
 
       fetchUserData();
@@ -38,9 +47,9 @@ const UserProfile = ({ setIsUserLoggedIn, isUserLoggedIn }) => {
         <div className="user-profile">
           <h2>User Profile</h2>
           <ul>
-            <li>Full Name: {userData.user.fullname}</li>
-            <li>Username: {userData.user.username}</li>
-            <li>Email: {userData.user.email}</li>
+            <li>Full Name: {userData.fullname}</li>
+            <li>Username: {userData.username}</li>
+            <li>Email: {userData.email}</li>
           </ul>
           <LogoutForm setIsUserLoggedIn={setIsUserLoggedIn} />
         </div>

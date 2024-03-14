@@ -14,6 +14,22 @@ const userSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+const verifyToken = (req, res, next) => {
+  const token = req.headers["authorization"];
+  if (!token) {
+    return res.status(401).json({ error: "Access denied. Token is required." });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    req.user = decoded;
+    console.log(decoded)
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+};
+
 // post end point for creating new user
 router.post("/register", async (req, res) => {
   try {
@@ -72,23 +88,24 @@ router.post("/login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token, userId: user._id });
+    res.status(200).json({ token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-router.get("/profile/:id", async (req, res) => {
+router.get("/profile", verifyToken, async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.params.id });
+    const user = await User.findOne({ _id: req.user.userId });
+    console.log(user);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     res.status(200).json({ user });
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: error.message });
   }
 });
 

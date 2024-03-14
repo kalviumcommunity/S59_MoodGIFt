@@ -29,11 +29,10 @@ const LoginForm = ({ setIsUserLoggedIn }) => {
       });
 
       if (response.ok) {
-        const { token, userId } = await response.json();
+        const { token } = await response.json();
 
         toast.success('Login Successful');
         document.cookie = `token=${token}; expires=${getExpirationDate(1)}`;
-        document.cookie = `user=${userId}; expires=${getExpirationDate(1)}`;
         setIsUserLoggedIn(true);
         setTimeout(() => {
           navigate("/");

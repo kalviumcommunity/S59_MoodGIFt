@@ -15,11 +15,11 @@ function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   useEffect(() => {
-    const userCookie = document.cookie
+    const tokenCookie = document.cookie
       .split(";")
-      .find((cookie) => cookie.trim().startsWith("user="));
-    console.log(userCookie);
-    if (userCookie) {
+      .find((cookie) => cookie.trim().startsWith("token="));
+    console.log(tokenCookie);
+    if (tokenCookie) {
       setIsUserLoggedIn(true);
     }
   }, []);
