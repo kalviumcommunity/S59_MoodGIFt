@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Form.css";
 import axios from "axios";
-const MemeForm = () => {
+const MemeForm = ({ isUserLoggedIn }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isUserLoggedIn) {
+      navigate("/login");
+    }
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -13,9 +20,25 @@ const MemeForm = () => {
 
   const onSubmit = async (data) => {
     try {
+      const tokenCookie = document.cookie
+        .split(";")
+        .find((cookie) => cookie.trim().startsWith("token="));
+      const token = tokenCookie?.split("=")[1];
+
+      if (!token) {
+        navigate("/login");
+        return;
+      }
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      };
+
       const response = await axios.post(
         `http://localhost:8080/meme/postMeme/${data.mood_category}`,
-        data
+        data,
+        config
       );
       console.log(response.data);
       navigate("/categories");
