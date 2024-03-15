@@ -11,6 +11,18 @@ MoodGIFt is a fun and lighthearted application designed to lift users' spirits b
 
 ### Deployed link :
 
-[MoodGIFt](https://main--mood-gift.netlify.app/)
+#### Render deployment link:
 
-### By SujalS
+[Render: MoodGIFt](https://s59-moodgift-myts.onrender.com/)
+
+#### cyclic deployment link:
+
+[Cyclic: MoodGIFt](https://frantic-smock-lion.cyclic.app/)
+
+#### CloudFare deployment link:
+
+[Cloudfare: MoodGIFt](https://mood-gift.pages.dev/)
+
+#### Netlify deployment link:
+
+[Netlify: MoodGIFt](https://mood-gift.netlify.app/)
