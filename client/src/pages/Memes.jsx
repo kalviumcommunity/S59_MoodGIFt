@@ -6,9 +6,12 @@ import Loader from "../components/Loader";
 import MemeInfo from "../components/MemeInfo";
 export default function Memes() {
   const [data, setData] = useState([]);
+  const [list, setList] = useState(null);
+  const [selectedUser, setSelectedUser] = useState("All");
   const [loading, setLoading] = useState(true);
   const [viewMeme, setViewMeme] = useState(false);
   const [currentMeme, setCurrentMeme] = useState(null);
+  const [uniqueUsers, setUniqueUsers] = useState([]);
 
   const showMeme = (meme) => {
     setCurrentMeme(meme);
@@ -27,6 +30,9 @@ export default function Memes() {
         .then((data) => {
           console.log(data);
           setData(data);
+          setList(data);
+          const uniqueUsers = [...new Set(data.map((user) => user.posted_by))];
+          setUniqueUsers(uniqueUsers);
           setLoading(false);
         })
         .catch((err) => {
@@ -35,18 +41,13 @@ export default function Memes() {
     }
   }, []);
 
-  const refetchData = async (category) => {
-    setLoading(true); 
-    const api = `https://frantic-smock-lion.cyclic.app/${category}`;
-    try {
-      const response = await fetch(api);
-      const data = await response.json();
-      setData(data);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
+  useEffect(() => {
+    const filteredList = data.filter((meme) => meme.posted_by === selectedUser);
+    setList(filteredList);
+  }, [selectedUser]);
+
+  const handleUserChange = (event) => {
+    setSelectedUser(event.target.value);
   };
 
   return (
@@ -63,11 +64,41 @@ export default function Memes() {
         </>
       )}
       {loading && <Loader />}
-      <div id="memes">
-        {data.map((meme, i) => {
-          return <Meme key={i} meme={meme} showMeme={showMeme} />;
-        })}
-      </div>
+      {list && (
+        <>
+          <div className="sortSelect">
+            <p>Sort by users:</p>
+            <select value={selectedUser} onChange={handleUserChange}>
+              <option value="">Select User</option>
+              {uniqueUsers.map((user, i) => (
+                <option key={i} value={user}>
+                  {user}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div id="memes">
+            {list.map((meme, i) => {
+              return <Meme key={i} meme={meme} showMeme={showMeme} />;
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 }
+
+// const refetchData = async (category) => {
+//   setLoading(true);
+//   const api = `https://frantic-smock-lion.cyclic.app/${category}`;
+//   try {
+//     const response = await fetch(api);
+//     const data = await response.json();
+//     setData(data);
+//   } catch (err) {
+//     console.log(err);
+//   } finally {
+//     setLoading(false);
+//   }
+// };

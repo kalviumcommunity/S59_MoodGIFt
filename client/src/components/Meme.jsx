@@ -8,6 +8,9 @@ export default function Meme({ meme, showMeme }) {
         showMeme(meme);
       }}
     >
+      <p className="posted-by">
+        <span className="posted">Posted By:</span> {meme.posted_by}
+      </p>
       <img src={meme.url} alt="" className="meme-img" />
       <p className="meme-name">{meme.name}</p>
     </div>
