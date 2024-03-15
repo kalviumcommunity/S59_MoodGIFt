@@ -36,7 +36,7 @@ const MemeForm = ({ isUserLoggedIn }) => {
       };
 
       const response = await axios.post(
-        `http://localhost:8080/meme/postMeme/${data.mood_category}`,
+        `https://frantic-smock-lion.cyclic.app/meme/postMeme/${data.mood_category}`,
         data,
         config
       );

@@ -27,7 +27,7 @@ const UpdateForm = ({ currentMeme, setInitiateUpdate }) => {
 
       console.log(filteredData);
       const response = await axios.patch(
-        `http://localhost:8080/meme/patch/${mood_category}/${meme_id}`,
+        `https://frantic-smock-lion.cyclic.app/meme/patch/${mood_category}/${meme_id}`,
         filteredData
       );
 

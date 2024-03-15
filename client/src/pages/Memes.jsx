@@ -9,7 +9,7 @@ export default function Memes() {
   const [loading, setLoading] = useState(true);
   const [viewMeme, setViewMeme] = useState(false);
   const [currentMeme, setCurrentMeme] = useState(null);
-  
+
   const [uniqueUsers, setUniqueUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("All");
   const [list, setList] = useState(null);
@@ -25,7 +25,7 @@ export default function Memes() {
       let end = category.toLowerCase();
       console.log(end);
 
-      const api = `http://localhost:8080/meme/${category}`;
+      const api = `https://frantic-smock-lion.cyclic.app/meme/${category}`;
       fetch(api)
         .then((res) => res.json())
         .then((data) => {

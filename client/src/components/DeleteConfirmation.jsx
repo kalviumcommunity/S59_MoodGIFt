@@ -9,7 +9,7 @@ export default function DeleteConfirmation({ setInitiateDelete, currentMeme }) {
       const meme_id = currentMeme._id;
       const mood_category = currentMeme.mood_category.toLowerCase();
       const response = await axios.delete(
-        `http://localhost:8080/meme/delete/${mood_category}/${meme_id}`
+        `https://frantic-smock-lion.cyclic.app/meme/delete/${mood_category}/${meme_id}`
       );
 
       console.log(response.data);
