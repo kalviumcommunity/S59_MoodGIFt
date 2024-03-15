@@ -59,8 +59,10 @@ router.post("/postMeme/:category", verifyToken, async (req, res) => {
     let memeModel = createMemeModel(category);
 
     let memeBody = req.body;
+
     const user = await User.findOne({ _id: req.user.userId });
     let posted_by = user.username;
+    
     const { error } = memeSchema.validate(memeBody, { abortEarly: false });
     if (error) {
       return res.status(400).json({ error: error.details });

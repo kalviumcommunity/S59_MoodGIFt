@@ -38,7 +38,7 @@ function App() {
           path="/login"
           element={<LoginForm setIsUserLoggedIn={setIsUserLoggedIn} />}
         ></Route>
-        <Route
+        <Route 
           path="/profile"
           element={
             <UserProfile

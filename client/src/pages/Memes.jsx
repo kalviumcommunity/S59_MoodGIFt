@@ -6,12 +6,13 @@ import Loader from "../components/Loader";
 import MemeInfo from "../components/MemeInfo";
 export default function Memes() {
   const [data, setData] = useState([]);
-  const [list, setList] = useState(null);
-  const [selectedUser, setSelectedUser] = useState("All");
   const [loading, setLoading] = useState(true);
   const [viewMeme, setViewMeme] = useState(false);
   const [currentMeme, setCurrentMeme] = useState(null);
+  
   const [uniqueUsers, setUniqueUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("All");
+  const [list, setList] = useState(null);
 
   const showMeme = (meme) => {
     setCurrentMeme(meme);
@@ -42,7 +43,10 @@ export default function Memes() {
   }, []);
 
   useEffect(() => {
-    const filteredList = data.filter((meme) => meme.posted_by === selectedUser);
+    const filteredList = data.filter((meme) => {
+      if (selectedUser === "All") return true;
+      return meme.posted_by === selectedUser;
+    });
     setList(filteredList);
   }, [selectedUser]);
 
@@ -69,7 +73,7 @@ export default function Memes() {
           <div className="sortSelect">
             <p>Sort by users:</p>
             <select value={selectedUser} onChange={handleUserChange}>
-              <option value="">Select User</option>
+              <option value="All">All</option>
               {uniqueUsers.map((user, i) => (
                 <option key={i} value={user}>
                   {user}
