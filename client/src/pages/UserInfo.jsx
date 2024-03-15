@@ -22,11 +22,14 @@ const UserProfile = ({ setIsUserLoggedIn, isUserLoggedIn }) => {
           return;
         }
 
-        const response = await fetch(`http://localhost:8080/user/profile`, {
-          headers: {
-            Authorization: token,
-          },
-        });
+        const response = await fetch(
+          `https://frantic-smock-lion.cyclic.app/user/profile`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
         if (response.status === 401) {
           navigate("/login");
           return;
