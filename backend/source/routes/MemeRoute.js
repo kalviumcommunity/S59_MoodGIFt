@@ -5,6 +5,7 @@ const router = express.Router();
 const { User } = require("../models/UserModel");
 const { MemeCategory } = require("../models/MemeCategoryModel");
 const { Meme } = require("../models/MemeModel");
+const { MemeTemplate } = require("../models/MemeTemplateModel");
 
 // importing user verification middlewares
 const { checkUploader } = require("../auth/checkUploader");
@@ -33,14 +34,14 @@ router.get("/:category", async (req, res) => {
   }
 });
 
-
 router.post("/postMeme", verifyToken, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.user.userId });
+    const template = await MemeTemplate.findOne({ _id: req.body.templateId });
 
     let posted_by = user.username;
-
-    const { url, caption, mood_category } = req.body;
+    const { caption } = req.body;
+    const { url, mood_category } = template;
 
     const newMemeBody = {
       url,

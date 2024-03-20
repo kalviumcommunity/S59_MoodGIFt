@@ -71,15 +71,18 @@ router.post("/login", async (req, res) => {
 
 router.get("/profile", verifyToken, async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.user.userId });
-    console.log(user);
+    const user = await User.findOne({ _id: req.user.userId })
+      .populate("posted_memes")
+      .populate("posted_meme_templates");
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const {password, ...userData} = user;
+    const { password, ...userData } = user.toObject(); // Converting to object to omit certain fields
     res.status(200).json({ userData });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: error.message });
   }
 });

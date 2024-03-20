@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     posted_meme_templates: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "meme_template" },
+      { type: mongoose.Schema.Types.ObjectId, ref: "Meme_template" },
     ],
     posted_memes: [{ type: mongoose.Schema.Types.ObjectId, ref: "meme" }],
   },

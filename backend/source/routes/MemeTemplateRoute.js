@@ -1,18 +1,29 @@
 const express = require("express");
 const router = express.Router();
 
-// importing the models 
+// importing the models
 const { User } = require("../models/UserModel");
 const { MemeTemplateCategory } = require("../models/MemeTemplateCategoryModel");
 const { MemeTemplate } = require("../models/MemeTemplateModel");
 
-// importing user verification middlewares 
+// importing user verification middlewares
 const { checkUploader } = require("../auth/checkUploader");
 const { verifyToken } = require("../auth/verifyToken");
 
-// schema validation function and schema 
+// schema validation function and schema
 const { validateData } = require("../validation/validatorFunction");
 const { memeTemplateValidationSchema } = require("../validation/joiSchemas");
+
+router.get("/", async (req, res) => {
+  try {
+    const categories = await MemeTemplateCategory.find().select("category");
+    const categoryNames = categories.map((category) => category.category);
+    res.json({ categories: categoryNames });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
 router.get("/:category", async (req, res) => {
   try {
@@ -31,7 +42,6 @@ router.get("/:category", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
 
 router.post("/postTemplate", verifyToken, async (req, res) => {
   try {
